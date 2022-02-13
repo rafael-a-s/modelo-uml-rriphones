@@ -1,0 +1,28 @@
+@startuml
+
+
+object Iphone{
+  Integer: id;
+  Double: preco;
+}
+object Modelo{
+  Integer: id;
+  String: nome;
+}
+object Cor{
+  Integer: id;
+  String: label;
+}
+object Estoque{
+  Integer: id;
+  Integer: quantidade;
+
+}
+object Usuario
+object Carrinho
+
+Iphone <-- Cor
+Iphone --> Modelo
+Modelo --> Estoque
+
+@enduml
