@@ -1,28 +1,63 @@
 @startuml
 
+'=============== Produto ============'
+class Iphone{
+  Integer: id
+  Double: preco
+  String: descricao
+}
+class Modelo{
+  Integer: id
+  String: nome
+}
+enum Cor{
+  Integer: id
+  String: label
+}
+class Estoque{
+  Integer: id
+  Integer: quantidade
 
-object Iphone{
-  Integer: id;
-  Double: preco;
 }
-object Modelo{
-  Integer: id;
-  String: nome;
-}
-object Cor{
-  Integer: id;
-  String: label;
-}
-object Estoque{
-  Integer: id;
-  Integer: quantidade;
+Iphone "*"*--"1" Cor
+Iphone "*"-->"1" Modelo
+Modelo "1"-->"1" Estoque
+'=============== Usuario ============'
+class Usuario{
+  Integer: id
+  String: Nome
+  String: cpf
+  Date: dataNascimento
 
 }
-object Usuario
-object Carrinho
+class Telefone{
+  Integer: id
+  String: codigoDeArea
+  String: numero
+}
+enum Genero{
+  Integer: id
+  String: label
+}
+class Endereco{
+  Integer: id
+  String: cep 
+  String: Endereco
+  Integer: numero
+  String: complemento
+}
 
-Iphone <-- Cor
-Iphone --> Modelo
-Modelo --> Estoque
+Usuario "1"--*"1" Genero
+Usuario "1"--*"1" Telefone
+Usuario "*"--"1" Endereco
+'=============== Compra ============'
+class Carrinho
+class Venda
+class itemVenda<Venda>
+
+
+
+'=============== relacionamentos ============'
+
 
 @enduml
