@@ -51,10 +51,22 @@ Usuario "1"--*"1" Genero
 Usuario "1"--*"1" Telefone
 Usuario "*"--"1" Endereco
 '=============== Compra ============'
-class Carrinho
-class Venda
-class itemVenda<Venda>
+class Carrinho{
+  itemVenda: listaItem
+}
+class Venda{
+  itemVenda: item
+  Usuario: usuario
 
+}
+class itemVenda{
+  ArrayList<Iphone>: listaIphones
+}
+
+itemVenda "*"--"*" Iphone
+Carrinho "1"--"1" itemVenda
+Venda "1"--"1" Carrinho
+Venda "1"--"*" Usuario
 
 
 '=============== relacionamentos ============'
