@@ -19,9 +19,9 @@ class Estoque{
   Integer: quantidade
 
 }
-Iphone "*"*--"1" Cor
-Iphone "*"-->"1" Modelo
-Modelo "1"-->"1" Estoque
+Iphone "*"--*"1" Cor
+Iphone "*"--"1" Modelo
+Iphone "1"--"1" Estoque
 '=============== Usuario ============'
 class Usuario{
   Integer: id
@@ -52,21 +52,28 @@ Usuario "1"--*"1" Telefone
 Usuario "*"--"1" Endereco
 '=============== Compra ============'
 class Carrinho{
-  itemVenda: listaItem
+  List<Iphone>: ListaCarrinho
 }
 class Venda{
-  itemVenda: item
-  Usuario: usuario
-
+  Integer: id
+  String: relatorio
 }
-class itemVenda{
-  ArrayList<Iphone>: listaIphones
+class Cartao{
+  String: numeroCartão
+  String: dataVencimento
+  String: cvDoCartão
 }
 
-itemVenda "*"--"*" Iphone
-Carrinho "1"--"1" itemVenda
+Enum OpcaoPagamento{
+  Integer: id
+  String: label
+}
+
+Carrinho "1"--"1" Iphone
 Venda "1"--"1" Carrinho
 Venda "1"--"*" Usuario
+Venda "1"--"1" Cartao
+Cartao "1"--*"1" OpcaoPagamento
 
 
 '=============== relacionamentos ============'
