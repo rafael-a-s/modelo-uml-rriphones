@@ -19,9 +19,16 @@ class Estoque{
   Integer: quantidade
 
 }
-Iphone "*"--*"1" Cor
-Iphone "*"--"1" Modelo
+class entradaEstoque{
+  Integer: id
+  String: modelo
+  String: cor
+
+}
+Iphone "*"--o "1" Cor
+Iphone "*"--*"1" Modelo
 Iphone "1"--"1" Estoque
+Estoque "1"-->"*" entradaEstoque
 '=============== Usuario ============'
 class Usuario{
   Integer: id
@@ -46,10 +53,24 @@ class Endereco{
   Integer: numero
   String: complemento
 }
+'Guardar hash do cv do cartao'
+'Hash da data de vencimento'
+class Cartao{
+  String: numeroCartão
+  String: dataVencimento
+  String: cvDoCartão 
+}
 
-Usuario "1"--*"1" Genero
+Enum Funcao{
+  Integer: id
+  String: label
+}
+
+Usuario "*"--o "1" Genero
 Usuario "1"--*"1" Telefone
-Usuario "*"--"1" Endereco
+Usuario "1"--*"*" Endereco
+Usuario "1"--o "*" Cartao
+Cartao "1"-->"*" Funcao
 '=============== Compra ============'
 class Carrinho{
   List<Iphone>: ListaCarrinho
@@ -58,25 +79,36 @@ class Venda{
   Integer: id
   String: relatorio
 }
-class Cartao{
-  String: numeroCartão
-  String: dataVencimento
-  String: cvDoCartão
+class  Pagamento<abstract>{
+  Data: dataHora
 }
-
-Enum OpcaoPagamento{
+class Pix {
+  List<Chave>: ListaPix
+}
+class Chave{
+  String:chavePix
+}
+Enum TipoChave{
   Integer: id
   String: label
 }
 
-Carrinho "1"--"1" Iphone
-Venda "1"--"1" Carrinho
-Venda "1"--"*" Usuario
-Venda "1"--"1" Cartao
-Cartao "1"--*"1" OpcaoPagamento
+Enum CartaoCreditoDebito{
+  Integer: id
+  String: label
+}
 
+
+Carrinho "1"--o "*" Iphone
+Venda "1"--"1" Carrinho
+Venda "*"--o "1" Usuario
+Venda "1"--"1" Pagamento
+Pagamento "1"--|>"1" Pix
+Pagamento "1"--|>"1" CartaoCreditoDebito
+Pix "1"--"*" Chave
+Chave "1"-->"1" TipoChave
 
 '=============== relacionamentos ============'
-
+'Buscar os dados de enderço via api dos correios'
 
 @enduml
