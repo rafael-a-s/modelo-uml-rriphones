@@ -2,84 +2,84 @@
 
 '=============== Produto ============'
 class Iphone{
-  Integer: id
-  Double: preco
-  String: descricao
+  + id: Integer
+  + preco: Double
+  + descricao:String
 }
 class Modelo{
-  Integer: id
-  String: nome
+  + id :Integer
+  + nome String
 }
 enum Cor{
-  Integer: id
-  String: label
+  + id: Integer: id
+  + nomeCor: String
 }
 class Estoque{
-  Integer: id
-  Integer: quantidade
+  + id : Integer
+  + quantidade: Integer
 
 }
 class entradaEstoque{
-  Integer: id
-  String: modelo
-  String: cor
+  + id: Integer
+  + modelo: String
+  + cor: String
 
 }
-Iphone "*"--o "1" Cor
-Iphone "*"--*"1" Modelo
-Iphone "1"--"1" Estoque
-Estoque "1"-->"*" entradaEstoque
+Iphone "*" o--> "1" Cor
+Iphone "*" *-->"1" Modelo
+Iphone "1" o-->"1" Estoque
+Estoque "1"<--*"*" entradaEstoque
 '=============== Usuario ============'
 class Usuario{
-  Integer: id
-  String: Nome
-  String: cpf
-  Date: dataNascimento
+  + id: Integer
+  + nome: String
+  + cpf: String
+  + dataNasciento: Date
 
 }
 class Telefone{
-  Integer: id
-  String: codigoDeArea
-  String: numero
+  + id:Integer
+  + codigoArea: String
+  + numero: String
 }
 enum Genero{
-  Integer: id
-  String: label
+  +id: Integer
+  + sexo: String
 }
 class Endereco{
-  Integer: id
-  String: cep 
-  String: Endereco
-  Integer: numero
-  String: complemento
+  + id:Integer
+  + cep: String
+  + endereco: String
+  + numero: Integer
+  + complemento: String
 }
 'Guardar hash do cv do cartao'
 'Hash da data de vencimento'
 class Cartao{
-  String: numeroCartão
-  String: dataVencimento
-  String: cvDoCartão 
+  + numeroCartão: String
+  + dataVencimento: String
+  + cvDoCartão: String
 }
 
 Enum Funcao{
-  Integer: id
-  String: label
+ + id: Integer
+ + funcaoCartão: String
 }
 
-Usuario "*"--o "1" Genero
-Usuario "1"--*"1" Telefone
-Usuario "1"--*"*" Endereco
-Usuario "1"--o "*" Cartao
-Cartao "1"-->"*" Funcao
+Usuario "*" o-->"1" Genero
+Usuario "1"*-->"1" Telefone
+Usuario "1" o-->"*" Endereco
+Usuario "1" *-->"*" Cartao
+Cartao "1" o-->"*" Funcao
 '=============== Compra ============'
-class Carrinho{
-  List<Iphone>: ListaCarrinho
+class ItemVenda{
+  + itemVenda: List
 }
 class Venda{
   Integer: id
   String: relatorio
 }
-class  Pagamento<abstract>{
+abstract class  Pagamento<abstract>{
   Data: dataHora
 }
 class Pix {
@@ -99,8 +99,8 @@ Enum CartaoCreditoDebito{
 }
 
 
-Carrinho "1"--o "*" Iphone
-Venda "1"--"1" Carrinho
+ItemVenda "1" o--> "*" Iphone
+Venda "1"*-->"1" ItemVenda
 Venda "*"--o "1" Usuario
 Venda "1"--"1" Pagamento
 Pagamento "1"--|>"1" Pix
