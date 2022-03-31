@@ -76,26 +76,26 @@ class ItemVenda{
   + itemVenda: List
 }
 class Venda{
-  Integer: id
-  String: relatorio
+  + id: Integer
+  + relatorio: String
 }
 abstract class  Pagamento<abstract>{
-  Data: dataHora
+  + dataHora: Date
 }
 class Pix {
-  List<Chave>: ListaPix
+  + ListaPix: List<Chave>
 }
 class Chave{
-  String:chavePix
+  + chavePix: String
 }
 Enum TipoChave{
-  Integer: id
-  String: label
+  + id: Integer
+  + chave :String
 }
 
 Enum CartaoCreditoDebito{
-  Integer: id
-  String: label
+  + id : Integer
+  + funcaoCartao: String
 }
 
 
